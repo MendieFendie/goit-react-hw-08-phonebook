@@ -48,7 +48,6 @@ export default class App extends React.Component {
   componentDidMount() {
     const contacts = localStorage.getItem('contacts');
     const parsedContacts = JSON.parse(contacts);
-    console.log(localStorage.contacts);
     if (localStorage.contacts) {
       this.setState({ contacts: parsedContacts });
     }
