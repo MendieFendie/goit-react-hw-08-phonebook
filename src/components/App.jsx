@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import ContactsList from './ContactList/ContactsList';
 import ContactForm from './ContactForm/ContactForm';
@@ -37,14 +37,20 @@ export default function App() {
     setContacts(contacts.filter(({ id }) => id !== contactId));
   }
 
-  useEffect(() => {
-    const contacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(contacts);
-    setContacts(parsedContacts);
-  }, []);
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
+    if (isMounted.current) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+      return;
+    }
+    if (localStorage.contacts) {
+      const contacts = localStorage.getItem('contacts');
+      const parsedContacts = JSON.parse(contacts);
+      setContacts(parsedContacts);
+    }
+
+    isMounted.current = true;
   }, [contacts]);
 
   const normalizedFilter = filter.toLowerCase();
