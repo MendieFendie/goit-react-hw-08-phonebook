@@ -26,6 +26,7 @@ export default function ContactForm() {
   function resetForm() {
     setName('');
     setNumber('');
+    console.log();
   }
 
   return (
