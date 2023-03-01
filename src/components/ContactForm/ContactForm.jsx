@@ -27,7 +27,7 @@ export default function ContactForm() {
     setName('');
     setNumber('');
   }
-  console.log();
+
   return (
     <>
       <form className={css.form} onSubmit={handleSubmit}>
