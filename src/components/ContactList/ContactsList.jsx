@@ -7,14 +7,11 @@ import { ClipLoader } from 'react-spinners';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
-
   const filterValue = useSelector(filter);
   const { items, isLoading, error } = useSelector(contacts);
-
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
-
   const normalizedFilter = filterValue.filter.toLowerCase();
   const visibleNames = items.filter(contact =>
     contact.name.toLowerCase().includes(normalizedFilter)
