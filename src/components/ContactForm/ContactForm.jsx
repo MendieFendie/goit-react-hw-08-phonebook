@@ -1,26 +1,28 @@
 import { React, useState } from 'react';
 import css from './ContactForm.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from 'redux/contactsSlice';
+import { postContact } from 'redux/operations';
 import { contacts } from 'redux/selectors';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setNumber] = useState('');
+  const { items } = useSelector(contacts);
 
   const dispatch = useDispatch();
-  const contactsList = useSelector(contacts);
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
       name: name,
-      number: number,
+      phone: phone,
     };
-    if (contactsList.some(({ name }) => name === data.name)) {
+
+    if (items.some(({ name }) => name === data.name)) {
       alert(`${data.name} is already in contacts.`);
       return;
     }
-    dispatch(addContact(data));
+
+    dispatch(postContact(data));
     resetForm();
   }
   function resetForm() {
@@ -49,9 +51,9 @@ export default function ContactForm() {
           <input
             className={css.form_input}
             type="tel"
-            name="number"
+            name="phone"
             onChange={e => setNumber(e.target.value)}
-            value={number}
+            value={phone}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
