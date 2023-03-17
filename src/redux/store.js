@@ -1,15 +1,31 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
+import { createSerializableStateInvariantMiddleware } from '@reduxjs/toolkit';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import thunkMiddleware from 'redux-thunk';
+
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
+import { authReducer } from './auth/authSlice';
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token'],
+};
 
 const rootReducer = combineReducers({
   contacts: contactsReducer,
+  auth: persistReducer(authPersistConfig, authReducer),
   filter: filterReducer,
 });
 
 export const store = configureStore({
   reducer: rootReducer,
-
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(thunk),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
+
+export const persistor = persistStore(store);
