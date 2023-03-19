@@ -26,6 +26,12 @@ const authSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
+    [authOperations.logout.fulfilled](state) {
+      state.user.name = null;
+      state.user.email = null;
+      state.token = null;
+      state.isLoggedIn = false;
+    },
   },
 });
 

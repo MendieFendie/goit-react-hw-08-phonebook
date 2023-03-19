@@ -1,4 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { useSelector } from 'react-redux';
+import authSelectors from './authSelectors';
 
 import axios from 'axios';
 
@@ -11,10 +13,16 @@ const register = createAsyncThunk('auth/register', async credentials => {
   } catch (e) {}
 });
 
-const login = createAsyncThunk('auth/login', async user => {
+const login = createAsyncThunk('auth/login', async credentials => {
   try {
-    const response = await axios.post('/users/login', user);
-    console.log(response.data);
+    const response = await axios.post('/users/login', credentials);
+    return response.data;
+  } catch (e) {}
+});
+
+const logout = createAsyncThunk('auth/logout', async credentials => {
+  try {
+    const response = await axios.post('/users/logout', null, credentials);
     return response.data;
   } catch (e) {}
 });
@@ -22,6 +30,7 @@ const login = createAsyncThunk('auth/login', async user => {
 const authOperations = {
   register,
   login,
+  logout,
 };
 
 export default authOperations;
