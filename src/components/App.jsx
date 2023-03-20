@@ -1,7 +1,7 @@
 import { AppBar } from './AppBar/AppBar';
-import { Login } from 'pages/Login';
-import { Registration } from 'pages/Registration';
-import { Contacts } from 'pages/Contacts';
+import { Login } from 'pages/Login/Login';
+import { Registration } from 'pages/Registration/Registration';
+import { Contacts } from 'pages/Contacts/Contacts';
 import { Route, Routes } from 'react-router-dom';
 
 import { Navigate } from 'react-router-dom';

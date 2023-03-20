@@ -1,0 +1,13 @@
+.logRegBtn {
+}
+.login {
+  margin-right: 10px;
+}
+
+.registration {
+}
+
+.login:hover,
+.registration:hover {
+  color: aqua;
+}

@@ -1,0 +1,44 @@
+.form {
+  display: table;
+  padding: 1em;
+  background: #f9f9f9;
+  border: 1px solid #c1c1c1;
+  margin: 2rem auto 0 auto;
+  max-width: 600px;
+  padding: 1em;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.form > p {
+  font-size: 40px;
+}
+.input {
+  background: #fff;
+  border: 1px solid #9c9c9c;
+  border-radius: 5px;
+  width: 80%;
+  display: grid;
+  margin: 0 auto;
+  height: 20px;
+}
+.button {
+  background: lightgrey;
+  padding: 0.7em;
+  width: 45%;
+  border: 0;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+.button:hover {
+  background: aqua;
+}
+
+.form > label {
+  padding: 0.5em 0.5em 0.5em 0;
+}
+
+.form > input {
+  padding: 0.7em;
+  margin-bottom: 0.5rem;
+}

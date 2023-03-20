@@ -1,0 +1,20 @@
+.userMenu {
+  display: flex;
+}
+
+.userName {
+  margin-right: 10px;
+}
+
+.btn {
+  border: none;
+  border-radius: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color: aqua;
+  cursor: auto;
+}

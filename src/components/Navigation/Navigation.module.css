@@ -1,0 +1,14 @@
+.navigation {
+}
+
+.mainLink {
+  margin-right: 10px;
+}
+
+.mainLink {
+}
+
+.mainLink:hover,
+.contactsLink:hover {
+  color: aqua;
+}
