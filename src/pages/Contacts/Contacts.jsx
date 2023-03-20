@@ -5,7 +5,6 @@ import ContactsList from 'components/ContactList/ContactsList';
 import { useSelector } from 'react-redux';
 import authSelectors from '../../redux/auth/authSelectors';
 import css from './Contacts.module.css';
-import authOperations from 'redux/auth/authOperations';
 
 export function Contacts() {
   const logedIn = useSelector(authSelectors.getItLoggedIn);
