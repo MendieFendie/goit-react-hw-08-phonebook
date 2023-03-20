@@ -1,3 +1,3 @@
 export function Main() {
-  return <div>Welcome to Contacts App</div>;
+  return <p>Welcome to Contacts App</p>;
 }

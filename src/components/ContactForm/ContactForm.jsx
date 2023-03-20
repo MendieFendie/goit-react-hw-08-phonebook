@@ -6,7 +6,7 @@ import { contacts } from 'redux/selectors';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setNumber] = useState('');
+  const [number, setNumber] = useState('');
   const { items } = useSelector(contacts);
 
   const dispatch = useDispatch();
@@ -14,14 +14,13 @@ export default function ContactForm() {
     e.preventDefault();
     const data = {
       name: name,
-      phone: phone,
+      number: number,
     };
 
     if (items.some(({ name }) => name === data.name)) {
       alert(`${data.name} is already in contacts.`);
       return;
     }
-
     dispatch(postContact(data));
     resetForm();
   }
@@ -51,9 +50,9 @@ export default function ContactForm() {
           <input
             className={css.form_input}
             type="tel"
-            name="phone"
+            name="number"
             onChange={e => setNumber(e.target.value)}
-            value={phone}
+            value={number}
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required

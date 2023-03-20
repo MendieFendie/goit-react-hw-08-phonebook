@@ -24,7 +24,6 @@ export function Registration() {
   const handleSubmit = e => {
     e.preventDefault();
     const data = { name, email, password };
-    console.log('Work');
     dispatch(authOperations.register(data));
     setName('');
     setEmail('');

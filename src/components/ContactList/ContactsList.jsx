@@ -24,7 +24,7 @@ const ContactsList = () => {
         {error && <b>{error}</b>}
         {visibleNames.map(contact => (
           <li className={css.list_item} key={contact.id}>
-            {contact.name + ':' + contact.phone}
+            {contact.name + ':' + contact.number}
             {
               <button
                 className={css.list_btn}
