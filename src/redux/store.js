@@ -1,9 +1,6 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
-import { createSerializableStateInvariantMiddleware } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import thunkMiddleware from 'redux-thunk';
-
 import { contactsReducer } from './contactsSlice';
 import { filterReducer } from './filterSlice';
 import { authReducer } from './auth/authSlice';
