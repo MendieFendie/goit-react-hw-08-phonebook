@@ -1,8 +1,10 @@
 import { React, useState } from 'react';
 import css from './ContactForm.module.css';
+import { ToastContainer } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { postContact } from 'redux/operations';
 import { contacts } from 'redux/selectors';
+import { notifySuccess, notifyWarn } from 'components/notify';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
@@ -10,6 +12,7 @@ export default function ContactForm() {
   const { items } = useSelector(contacts);
 
   const dispatch = useDispatch();
+
   function handleSubmit(e) {
     e.preventDefault();
     const data = {
@@ -18,10 +21,11 @@ export default function ContactForm() {
     };
 
     if (items.some(({ name }) => name === data.name)) {
-      alert(`${data.name} is already in contacts.`);
+      notifyWarn(`${data.name} is already in contacts.`);
       return;
     }
     dispatch(postContact(data));
+    notifySuccess(`${data.name} added to contacts`);
     resetForm();
   }
   function resetForm() {
@@ -62,6 +66,7 @@ export default function ContactForm() {
           Add contact
         </button>
       </form>
+      <ToastContainer />
     </>
   );
 }

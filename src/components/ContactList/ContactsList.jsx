@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { deleteContact, fetchContacts } from 'redux/operations';
 import { ClipLoader } from 'react-spinners';
+import { notifySuccess } from 'components/notify';
+import { ToastContainer } from 'react-toastify';
 
 const ContactsList = () => {
   const dispatch = useDispatch();
@@ -31,7 +33,12 @@ const ContactsList = () => {
                 type="button"
                 name="delete"
                 id={contact.id}
-                onClick={e => dispatch(deleteContact(e.currentTarget.id))}
+                onClick={e =>
+                  dispatch(
+                    deleteContact(e.currentTarget.id),
+                    notifySuccess('Contact deleted')
+                  )
+                }
               >
                 delete
               </button>
@@ -39,6 +46,7 @@ const ContactsList = () => {
           </li>
         ))}
       </ul>
+      <ToastContainer />
     </>
   );
 };
