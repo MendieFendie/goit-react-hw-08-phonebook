@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import { notifyWarn } from 'components/notify';
 import authOperations from 'redux/auth/authOperations';
 import css from './Registration.module.css';
 
@@ -24,60 +26,67 @@ export function Registration() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const data = { name, email, password };
-    dispatch(authOperations.register(data));
-    setName('');
+
+    const response = await dispatch(authOperations.register(data));
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/contacts');
+    } else {
+      notifyWarn('Opps .Something went wrong . Check the input fields');
+      return;
+    }
+
     setEmail('');
     setPassword('');
-    if (authOperations.register.fulfilled) {
-      navigate('/');
-    }
   };
 
   return (
-    <form
-      className={css.form}
-      action="submit"
-      onSubmit={handleSubmit}
-      autoComplete="off"
-    >
-      <p>Create new user</p>
+    <>
+      <form
+        className={css.form}
+        action="submit"
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
+        <p>Create new user</p>
 
-      <label>
-        Name
-        <input
-          className={css.input}
-          type="text"
-          value={name}
-          name="name"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Email
-        <input
-          className={css.input}
-          type="email"
-          value={email}
-          name="email"
-          onChange={handleChange}
-        />
-      </label>
-      <label>
-        Password
-        <input
-          className={css.input}
-          type="password"
-          value={password}
-          name="password"
-          onChange={handleChange}
-        />
-      </label>
-      <button className={css.button} type="submit">
-        Create user
-      </button>
-    </form>
+        <label>
+          Name
+          <input
+            className={css.input}
+            type="text"
+            value={name}
+            name="name"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Email
+          <input
+            className={css.input}
+            type="email"
+            value={email}
+            name="email"
+            onChange={handleChange}
+          />
+        </label>
+        <label>
+          Password
+          <input
+            className={css.input}
+            type="password"
+            value={password}
+            name="password"
+            onChange={handleChange}
+          />
+        </label>
+        <button className={css.button} type="submit">
+          Create user
+        </button>
+      </form>
+      <ToastContainer />
+    </>
   );
 }

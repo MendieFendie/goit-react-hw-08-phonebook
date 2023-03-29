@@ -4,6 +4,9 @@ body {
   font-family: sans-serif;
   line-height: 1.5;
   text-decoration: none;
+  background: url('./img/background.png ') no-repeat;
+  background-size: 100%;
+  background-color: antiquewhite;
 }
 
 h1,

@@ -18,7 +18,10 @@ const register = createAsyncThunk('auth/register', async credentials => {
     const response = await axios.post('/users/signup', credentials);
     token.set(response.data.token);
     return response.data;
-  } catch (e) {}
+  } catch (e) {
+    console.log(e.message);
+    return Promise.reject(e);
+  }
 });
 
 const login = createAsyncThunk('auth/login', async credentials => {
@@ -28,14 +31,19 @@ const login = createAsyncThunk('auth/login', async credentials => {
     token.set(response.data.token);
 
     return response.data;
-  } catch (e) {}
+  } catch (e) {
+    console.log(e.message);
+    return Promise.reject(e);
+  }
 });
 
 const logout = createAsyncThunk('auth/logout', async credentials => {
   try {
     await axios.post('/users/logout', null, credentials);
     token.unset();
-  } catch (e) {}
+  } catch (e) {
+    return Promise.reject(e);
+  }
 });
 
 const refreshCurrentUser = createAsyncThunk(
@@ -44,10 +52,6 @@ const refreshCurrentUser = createAsyncThunk(
     const state = thunkAPI.getState();
 
     const persistedToken = state.auth.token;
-
-    // if (persistedToken === null) {
-    //   return thunkAPI.rejectWithValue();
-    // }
 
     try {
       token.set(persistedToken);

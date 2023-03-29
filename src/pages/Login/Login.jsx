@@ -1,21 +1,16 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastify';
+import { notifyWarn } from 'components/notify';
 import authOperations from 'redux/auth/authOperations';
-import authSelectors from 'redux/auth/authSelectors';
 import css from './Login.module.css';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(authSelectors.getItLoggedIn);
   const navigate = useNavigate();
-
-  if (isLoggedIn) {
-    navigate('/');
-  }
 
   const handleChange = ({ target: { name, value } }) => {
     switch (name) {
@@ -28,13 +23,18 @@ export function Login() {
     }
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    dispatch(authOperations.login({ email, password }));
-    if (authOperations.login.fulfilled) {
-      navigate('/');
+    const response = await dispatch(authOperations.login({ email, password }));
+
+    if (response.meta.requestStatus === 'fulfilled') {
+      navigate('/contacts');
+    } else {
+      notifyWarn('Invalid email or password');
+      return;
     }
+
     setEmail('');
     setPassword('');
   };
@@ -67,6 +67,7 @@ export function Login() {
           Login to your account
         </button>
       </form>
+      <ToastContainer />
     </>
   );
 }
