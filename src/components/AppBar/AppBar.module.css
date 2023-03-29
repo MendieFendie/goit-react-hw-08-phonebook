@@ -10,11 +10,6 @@
 }
 
 .appName {
-  position: absolute;
-  bottom: 50px;
-  left: 0;
-  right: 0;
-  text-align: center;
   font-family: 'Delicious Handrawn';
   color: #f1c40f;
   font-size: 28px;

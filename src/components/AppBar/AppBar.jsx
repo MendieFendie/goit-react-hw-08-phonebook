@@ -13,10 +13,11 @@ export function AppBar() {
     <>
       <header className={css.header}>
         <Navigation />
+        <p className={css.appName}>Contacts App.</p>
         {isLoggedIn ? <UserMenu /> : <LoginRegistration />}
       </header>
       <Outlet />
-      <p className={css.appName}>Contacts App.</p>
+
       <p className={css.text}>
         Stay Connected to Your Family, Friends and Colleagues.
       </p>
