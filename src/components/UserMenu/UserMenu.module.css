@@ -1,5 +1,6 @@
 .userMenu {
   display: flex;
+  width: 135px;
 }
 
 .userName {

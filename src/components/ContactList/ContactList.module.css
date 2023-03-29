@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  background-color: #f8ead9;
 }
 
 .list_item {

@@ -25,4 +25,5 @@
   font-family: 'Delicious Handrawn', cursive;
   font-size: 20px;
   margin-bottom: 30px;
+  z-index: -1;
 }
